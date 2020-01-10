@@ -9,7 +9,7 @@ class Point extends Model
     public $timestamps = false;
     protected $primaryKey = 'id_point';
     protected $fillable = [
-        'nom', 'ville', 'description','num_agent','date_saisie','num_categorie'
+        'coordonnees','nom','ville', 'description','num_agent','date_saisie','num_categorie'
     ];
 
     

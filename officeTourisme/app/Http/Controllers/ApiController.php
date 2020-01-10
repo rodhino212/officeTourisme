@@ -20,6 +20,7 @@ class ApiController extends Controller
         //$point = Point::create($request->all());
         //return response()->json($article, 201);
         $point = new Point;
+        $point->coordonnees = $request->coordonnees;
         $point->nom = $request->nom;
         $point->ville= $request->ville;
         $point->description=$request->description;
@@ -50,6 +51,7 @@ class ApiController extends Controller
         // $point->update($request->all());
         if(Point::where('id_point',$id)->exists()){
             $point = Point::find($id);
+            $point->coordonnees = is_null($request->coordonnees) ? $point->coordonnees : $request->coordonnees;
             $point->nom = is_null($request->nom) ? $point->nom : $request->nom;
             $point->ville = is_null($request->ville) ? $point->ville : $request->ville;
             $point->description = is_null($request->description) ? $point->description : $request->description;
