@@ -28,7 +28,7 @@ class ApiController extends Controller
         $point->num_categorie= $request->num_categorie;
         $point->save();
         return response()->json([
-            "message"=>"point enregistrer"
+            "message"=>"point record created"
         ], 201);
     }
 
@@ -48,9 +48,9 @@ class ApiController extends Controller
         //logic to update a point record goes here
         // $point = Point::findOrFail($id);
         // $point->update($request->all());
-        if(Point::where('id',$id)->exists()){
+        if(Point::where('id_point',$id)->exists()){
             $point = Point::find($id);
-            $point->name = is_null($request->name) ? $point->name : $request->name;
+            $point->nom = is_null($request->nom) ? $point->nom : $request->nom;
             $point->ville = is_null($request->ville) ? $point->ville : $request->ville;
             $point->description = is_null($request->description) ? $point->description : $request->description;
             $point->num_agent = is_null($request->num_agent) ? $point->num_agent : $request->num_agent;
@@ -72,13 +72,13 @@ class ApiController extends Controller
         //logic to delete a point record goes here
         // $point->delete();
         // return response()->json(null, 204);
-        if(Point::where('id',$id)->exists()){
+        if(Point::where('id_point',$id)->exists()){
             $point = Point::find($id);
             $point->delete();
 
             return response()->json([
                 "message"=> "records deleted"
-            ],204);
+            ],202);
         }else{
             return response()->json([
                 "message"=>"Point not found"
