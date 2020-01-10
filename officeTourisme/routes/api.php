@@ -16,3 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('points','ApiController@getAllPoints');
+Route::get('points/{id}','ApiController@getPoint');
+Route::post('points','ApiController@createPoint');
+Route::put('points/{id}','ApiController@updatePoint');
+Route::delete('points/{id}','ApiController@deletePoint');

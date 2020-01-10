@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Point;
 use Illuminate\Http\Request;
+use DB;
 
 class PointController extends Controller
 {
@@ -14,7 +15,9 @@ class PointController extends Controller
      */
     public function index()
     {
-        //
+        $test =  DB::select('SELECT * FROM points where id_point=1');
+
+        return view('accueil',['test'=>$test]);
     }
 
     /**

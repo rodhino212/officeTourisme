@@ -1,1 +1,3 @@
-<div id="test de cebri"><h1>test</h1></div>
+
+
+<h1>le nom est {{ $test[0]->id_point }}</h1>

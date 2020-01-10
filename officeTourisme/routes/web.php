@@ -15,9 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/accueil', function () {
-    
-    return "Hello";
-});
-
-
+Route::get('/accueil','PointController@index')->name('accueil');
