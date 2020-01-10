@@ -9,12 +9,16 @@ class ApiController extends Controller
 {
     public function getAllPoints(){
         //logic to get all points
+        //return Point::all();
         $point = point::all()->toJson(JSON_PRETTY_PRINT);
         return response($point,200);
+        
     }
 
     public function createPoint(Request $request){
         //logic to create a point record goes here
+        //$point = Point::create($request->all());
+        //return response()->json($article, 201);
         $point = new Point;
         $point->nom = $request->nom;
         $point->ville= $request->ville;
@@ -42,6 +46,8 @@ class ApiController extends Controller
 
     public function updatePoint(Request $request, $id){
         //logic to update a point record goes here
+        // $point = Point::findOrFail($id);
+        // $point->update($request->all());
         if(Point::where('id',$id)->exists()){
             $point = Point::find($id);
             $point->name = is_null($request->name) ? $point->name : $request->name;
@@ -64,13 +70,15 @@ class ApiController extends Controller
 
     public function deletePoint($id){
         //logic to delete a point record goes here
+        // $point->delete();
+        // return response()->json(null, 204);
         if(Point::where('id',$id)->exists()){
             $point = Point::find($id);
             $point->delete();
 
             return response()->json([
                 "message"=> "records deleted"
-            ],202);
+            ],204);
         }else{
             return response()->json([
                 "message"=>"Point not found"
