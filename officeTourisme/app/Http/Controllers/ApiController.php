@@ -64,6 +64,18 @@ class ApiController extends Controller
 
     public function deletePoint($id){
         //logic to delete a point record goes here
+        if(Point::where('id',$id)->exists()){
+            $point = Point::find($id);
+            $point->delete();
+
+            return response()->json([
+                "message"=> "records deleted"
+            ],202);
+        }else{
+            return response()->json([
+                "message"=>"Point not found"
+            ],404);
+        }
     }
 
 
