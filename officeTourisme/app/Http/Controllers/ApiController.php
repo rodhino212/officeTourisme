@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Point;
+use App\Categorie;
 
 class ApiController extends Controller
 {
@@ -88,8 +89,20 @@ class ApiController extends Controller
         }
     }
 
+    // récupérer la liste des catégories
+    public function getAllCategorie(){
+        $categorie = categorie::all()->toJson(JSON_PRETTY_PRINT);
+        return response($categorie,200);
+    }
 
-    //public function
+
+    // récupérer la liste des villes
+    public function getAllVille(){
+        $ville = point::select('ville')->distinct()->get()->toJson(JSON_PRETTY_PRINT);
+        return response($ville,200);
+    }
+
+
 
 
 }
