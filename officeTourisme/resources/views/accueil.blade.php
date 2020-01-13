@@ -42,16 +42,15 @@
 
                 <div class="column is-one-quarter">  <!-- Liste des Catégories -->
                     <div class="select">
-                        <select>
+                        <select id="categorie">
                             <option>Select dropdown</option> 
-                            <option>With options</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="column is-one-quarter">  <!-- Liste des Villes -->
                     <div class="select" >
-                        <select>
+                        <select id="ville">
                             <option>Select dropdown</option>
                             <option>With options</option>
                         </select>
@@ -105,37 +104,49 @@
 
 
 <script type="text/javascript">
-    // const xhr =new XMLHttpRequest();
+    const xhr =new XMLHttpRequest();
+    //ouvrir les catégories
+    xhr.open('GET',"http://officetourisme.local/api/categories");
+    xhr.onreadystatechange = function(ev){
+        console.log(xhr.readyState);
+    }
+    // onload = lors du chargement
+    xhr.onload = () => {
+        let data2 =JSON.parse(xhr.responseText);
+        // get l'élément par ID
+        let main = document.getElementById('ok');
+        data2.forEach(func);
+        function func(item,index){
+            var op=document.createElement("option");
+            op.innerHTML= item.nom;
+            document.getElementById("categorie").appendChild(op)
+            //document.getElementById("categorie").options[index].innerHTML = item.nom;
+        }
+    }
+    xhr.send();
 
-    // //ouvrir
-    // xhr.open('GET',"http://officetourisme.local/api/points/5");
 
-    // xhr.onreadystatechange = function(ev){
-    //     console.log(xhr.readyState);
-    // }
 
-    // // onload = lors du chargement
-    // xhr.onload = () => {
-    //     //const data =JSON.parse(xhr.response);
-    //     //console.log(data);
+    //villes
 
-    //     let data2 =JSON.parse(xhr.responseText);
-    //     // get l'élément par ID
-    //     let main = document.getElementById('ok');
-    //     data2.forEach(item => {
-    //         // crée un élément <p></p>
-    //        let p = document.createElement('p');
-    //         // la classe de p prend la couleur link (blue)
-    //        p.className="has-text-link";
-    //        p.textContent =item.nom;
-    //        main.appendChild(p);
-
-    //        let element = document.getElementById('nom').textContent=document.getElementById('nom').textContent+' '+item.nom;
-
-    //     });
-    // }
-
-    
-
-    // xhr.send();
+    const xhr2 =new XMLHttpRequest();
+    //ouvrir les catégories
+    xhr2.open('GET',"http://officetourisme.local/api/villes");
+    xhr2.onreadystatechange = function(ev){
+        console.log(xhr2.readyState);
+    }
+    // onload = lors du chargement
+    xhr2.onload = () => {
+        let data3 =JSON.parse(xhr2.responseText);
+        // get l'élément par ID
+        let main = document.getElementById('ok');
+        data3.forEach(func);
+        function func(item,index){
+            var op=document.createElement("option");
+            op.innerHTML= item.ville;
+            document.getElementById("ville").appendChild(op)
+            //document.getElementById("categorie").options[index].innerHTML = item.nom;
+        }
+    }
+    xhr2.send();
 </script>
