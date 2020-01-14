@@ -83,7 +83,7 @@
         <!---------------------------- Section 2------------------------------- -->
         <div class="section_div">
             <section class="box">
-                <table class="table">
+                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
                     <thead>
                         <tr>
                             <th title="coordonnées">Coordonnées</th>

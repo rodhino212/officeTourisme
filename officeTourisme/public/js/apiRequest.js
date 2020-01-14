@@ -38,14 +38,12 @@ xhr_ville.onreadystatechange = function(ev){
 // onload = lors du chargement
 xhr_ville.onload = () => {
     let data_ville =JSON.parse(xhr_ville.responseText);
-    // get l'élément par ID
-    //let main = document.getElementById('ok');
+
     data_ville.forEach(func);
     function func(item,index){
         var op=document.createElement("option");
         op.innerHTML= item.ville;
         document.getElementById("ville").appendChild(op)
-        //document.getElementById("categorie").options[index].innerHTML = item.nom;
     }
 }
 xhr_ville.send();
@@ -63,18 +61,40 @@ xhr_point.onreadystatechange = function(ev){
 }
 // onload = lors du chargement
 xhr_point.onload = () => {
-    let data_point =JSON.parse(xhr_point.responseText);
-    // get l'élément par ID
-    //let main = document.getElementById('ok');
-    data_point.forEach(func);
-    function func(item,index){
-        var tr=document.createElement("tr");
-        var td=document.createElement("td");    
+    let data_point =JSON.parse(xhr_point.responseText); //on récupère en TEXT la table points(en JSON) que l'on stocke dans data_point
+
+    // récupère le nom des attributs/colonnes de la table points
+    result = Object.getOwnPropertyNames(data_point[0]);
+
+    // on parcourt chaque ligne de résultat dans une fonction (functiontr)
+    result.forEach(functiontr);
+
+   // obj = result et i correspond au compteur (i=0; i<obj.length;i++)
+    function functiontr(obj,i){
+        //
+        if(i>0){
+            //création de l'élément <td></td> (colonne)
+            var td=document.createElement("td");
+
+            //on parcourt chaque ligne de data_point qui est la table points dans une fonction (func)
+            data_point.forEach(func);
+
+            //item = obj et index = au compteur (index=0;index<item.length;index++)
+            function func(item,index){
+
+                //création de l'élément <tr></tr> donc ligne 
+                var tr=document.createElement("tr"); 
+
+                //on ajoute la valeur d'item[obj] dans la ligne tr ( la variable tr prend la valeur de item[obj])
+                tr.innerHTML=item[obj];
+                //la variable td prend comme enfant la variable tr
+                td.appendChild(tr);
+            }
+            // recherche l'élement par ID qui est "list_points" et on ajoute comme enfant la variable td
+            document.getElementById("list_points").appendChild(td);
+        }
         
-        //td.innerHTML= item.;
-        tr.appendChild();
-        document.getElementById("list_points").appendChild(tr)
-        //document.getElementById("categorie").options[index].innerHTML = item.nom;
     }
 }
+// envoie des données.
 xhr_point.send();
