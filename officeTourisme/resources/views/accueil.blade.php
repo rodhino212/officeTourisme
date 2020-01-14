@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="{{asset('js/apiRequest.js')}}"></script>
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
 </head>
 
@@ -43,7 +44,7 @@
                 <div class="column is-one-quarter">  <!-- Liste des Catégories -->
                     <div class="select">
                         <select id="categorie">
-                            <option>Select dropdown</option> 
+                            <option disabled selected>Selectionner une catégorie</option> 
                         </select>
                     </div>
                 </div>
@@ -51,8 +52,7 @@
                 <div class="column is-one-quarter">  <!-- Liste des Villes -->
                     <div class="select" >
                         <select id="ville">
-                            <option>Select dropdown</option>
-                            <option>With options</option>
+                            <option disabled selected>Selectionner une ville</option>
                         </select>
                     </div>
                 </div>
@@ -80,10 +80,24 @@
             </div>
             
         </section>
-        <!-- -------------------------- Section 2------------------------------- -->
+        <!---------------------------- Section 2------------------------------- -->
         <div class="section_div">
             <section class="box">
-
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th title="coordonnées">Coordonnées</th>
+                            <th title="nom">Nom</th>
+                            <th title="ville">Ville</th>
+                            <th title="description">Description</th>
+                            <th title="agent">Agent</th>
+                            <th title="date saisie">Date saisie</th>
+                            <th title="catégorie">Catégorie</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list_points">
+                    </tbody>
+                </table>
             </section>
         </div>
     </article>
@@ -94,59 +108,3 @@
 </footer>-->
 
 
-
-
-
-
-
-
-
-
-
-<script type="text/javascript">
-    const xhr =new XMLHttpRequest();
-    //ouvrir les catégories
-    xhr.open('GET',"http://officetourisme.local/api/categories");
-    xhr.onreadystatechange = function(ev){
-        console.log(xhr.readyState);
-    }
-    // onload = lors du chargement
-    xhr.onload = () => {
-        let data2 =JSON.parse(xhr.responseText);
-        // get l'élément par ID
-        let main = document.getElementById('ok');
-        data2.forEach(func);
-        function func(item,index){
-            var op=document.createElement("option");
-            op.innerHTML= item.nom;
-            document.getElementById("categorie").appendChild(op)
-            //document.getElementById("categorie").options[index].innerHTML = item.nom;
-        }
-    }
-    xhr.send();
-
-
-
-    //villes
-
-    const xhr2 =new XMLHttpRequest();
-    //ouvrir les catégories
-    xhr2.open('GET',"http://officetourisme.local/api/villes");
-    xhr2.onreadystatechange = function(ev){
-        console.log(xhr2.readyState);
-    }
-    // onload = lors du chargement
-    xhr2.onload = () => {
-        let data3 =JSON.parse(xhr2.responseText);
-        // get l'élément par ID
-        let main = document.getElementById('ok');
-        data3.forEach(func);
-        function func(item,index){
-            var op=document.createElement("option");
-            op.innerHTML= item.ville;
-            document.getElementById("ville").appendChild(op)
-            //document.getElementById("categorie").options[index].innerHTML = item.nom;
-        }
-    }
-    xhr2.send();
-</script>
