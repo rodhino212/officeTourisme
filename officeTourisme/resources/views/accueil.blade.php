@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet">
 </head>
 
-<header>
+<header >
         <nav class="navbar has-shadow" role="navigation">
             <div class="navbar-brand">
                 <div class="navbar-item">
@@ -22,8 +22,8 @@
             </div>
             <div id="nav" class="navbar-menu">
                 <div class="navbar-end">
-                    <a class="navbar-item" href="#">Map</a>
-                    <a class="navbar-item" href="#">Liste</a>
+                <a class="navbar-item" href="#">Map</a>
+                    <a class="navbar-item" href="{{url('/')}}">Liste</a>
                 </div>
             </div>
             
@@ -83,21 +83,7 @@
         <!---------------------------- Section 2------------------------------- -->
         <div class="section_div">
             <section class="box">
-                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                    <thead>
-                        <tr>
-                            <th title="coordonnées">Coordonnées</th>
-                            <th title="nom">Nom</th>
-                            <th title="ville">Ville</th>
-                            <th title="description">Description</th>
-                            <th title="agent">Agent</th>
-                            <th title="date saisie">Date saisie</th>
-                            <th title="catégorie">Catégorie</th>
-                        </tr>
-                    </thead>
-                    <tbody id="list_points">
-                    </tbody>
-                </table>
+                @yield('liste')
             </section>
         </div>
     </article>

@@ -12,7 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('accueil');
+    return view('liste');
 });
 
-//Route::get('/accueil','PointController@index')->name('accueil');
+Route::get('/liste', function () {
+    return view('liste');
+});
+
+Route::get('/map', function () {
+    return view('map');
+});

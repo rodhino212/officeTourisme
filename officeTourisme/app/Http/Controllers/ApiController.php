@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Point;
 use App\Categorie;
+use App\Agent;
 
 class ApiController extends Controller
 {
@@ -88,13 +89,70 @@ class ApiController extends Controller
             ],404);
         }
     }
+//------------------------------------------------------------------------------------------------------------------------Categorie
 
     // récupérer la liste des catégories
-    public function getAllCategorie(){
-        $categorie = categorie::all()->toJson(JSON_PRETTY_PRINT);
-        return response($categorie,200);
+    public function getAllCategories(){
+        $categories = categorie::all()->toJson(JSON_PRETTY_PRINT);
+        return response($categories,200);
     }
 
+    //récuperer tous les agents
+    public function getCategorie($id){
+        if(categorie::where('num_categorie',$id)->exists()){
+            $categorie= categorie::where('num_categorie',$id)->get()->toJson(JSON_PRETTY_PRINT);
+            return response($categorie,200);
+        }else{
+            return response()->json([
+                "message"=>"categorie not found"
+            ], 404);
+        }
+    }
+    //création du catégorie
+    public function createCategorie(Request $request){
+        $categorie = categorie::create($request->all());
+        $categorie->save();
+        return response()->json([
+            "message"=>"categorie record created"
+        ], 201);
+    }
+
+    //update une catégorie
+    public function updateCategorie(Request $request,$id){
+
+        if(categorie::where('num_categorie',$id)->exists()){
+            $categorie = categorie::find($id);
+            $categorie->nom = is_null($request->nom) ? $categorie->nom : $request->nom;
+            $categorie->save();
+            
+            return response()->json([
+                "message"=>"records updated successfully"
+            ],200);
+        }else{
+            return response()->json([
+                "message"=>"Categorie not found"
+            ],404);
+        }
+    }
+
+    // suppression d'une categorie
+    public function deleteCategorie($id){
+        if(categorie::where('num_categorie',$id)->exists()){
+            $categorie = categorie::find($id);
+            $categorie->delete();
+
+            return response()->json([
+                "message"=> "records deleted"
+            ],202);
+        }else{
+            return response()->json([
+                "message"=>"Categorie not found"
+            ],404);
+        }
+    }
+
+
+//------------------------------------------------------------------------------------------------------------------------ville
 
     // récupérer la liste des villes
     public function getAllVille(){
@@ -103,6 +161,73 @@ class ApiController extends Controller
     }
 
 
+    //------------------------------------------------------------------------------------------------------------------------agent
 
+    //récupérer tous les agents
+    public function getAllAgents(){
+        $agents = agent::all()->toJson(JSON_PRETTY_PRINT);
+        return response($agents,200);
+    }
 
+    //récupérer un agent par id
+    public function getAgent($id){
+        if(agent::where('num_agent',$id)->exists()){
+            $agent= agent::where('num_agent',$id)->get()->toJson(JSON_PRETTY_PRINT);
+            return response($agent,200);
+        }else{
+            return response()->json([
+                "message"=>"Agent not found"
+            ], 404);
+        }
+    }
+
+    //création d'un agent
+    public function createAgent(Request $request){
+        //logic to create a point record goes here
+        /*$agent = new agent;
+        $agent->nom = $request->nom;
+        $agent->prenom = $request->prenom;
+        $agent->mdp= $request->mdp;*/
+
+        $agent = agent::create($request->all());
+        $agent->save();
+        return response()->json([
+            "message"=>"Agent record created"
+        ], 201);
+    }
+
+    //update agent 
+    public function updateAgent(Request $request,$id){
+
+        if(agent::where('num_agent',$id)->exists()){
+            $agent = agent::find($id);
+            $agent->nom = is_null($request->nom) ? $agent->nom : $request->nom;
+            $agent->prenom = is_null($request->prenom) ? $agent->prenom : $request->prenom;
+            $agent->mdp = is_null($request->mdp) ? $agent->mdp : $request->mdp;
+            $agent->save();
+            
+            return response()->json([
+                "message"=>"records updated successfully"
+            ],200);
+        }else{
+            return response()->json([
+                "message"=>"Agent not found"
+            ],404);
+        }
+    }
+
+    public function deleteAgent($id){
+        if(agent::where('num_agent',$id)->exists()){
+            $agent = agent::find($id);
+            $agent->delete();
+
+            return response()->json([
+                "message"=> "records deleted"
+            ],202);
+        }else{
+            return response()->json([
+                "message"=>"Agent not found"
+            ],404);
+        }
+    }
 }

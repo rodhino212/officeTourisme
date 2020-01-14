@@ -25,4 +25,14 @@ Route::delete('points/{id}','ApiController@deletePoint');
 
 Route::get('villes','ApiController@getAllVille');
 
-Route::get('categories','ApiController@getAllCategorie');
+Route::get('categories','ApiController@getAllCategories');
+Route::get('categories/{id}','ApiController@getCategorie');
+Route::post('categories','ApiController@createCategorie');
+Route::put('categories/{id}','ApiController@updateCategorie');
+Route::delete('categories/{id}','ApiController@deleteCategorie');
+
+Route::get('agents','ApiController@getAllAgents');
+Route::get('agents/{id}','ApiController@getAgent');
+Route::post('agents','ApiController@createAgent');
+Route::put('agents/{id}','ApiController@updateAgent');
+Route::delete('agents/{id}','ApiController@deleteAgent');
