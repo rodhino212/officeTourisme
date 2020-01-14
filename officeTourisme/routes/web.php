@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('accueil');
 });
+
+//Route::get('/accueil','PointController@index')->name('accueil');
