@@ -11,7 +11,7 @@
         <nav class="navbar has-shadow" role="navigation">
             <div class="navbar-brand">
                 <div class="navbar-item">
-                    <h1 class="title">Tourisme</h1>
+                    <h1 class="title">Matini'Tour</h1>
                 </div>
                 <a role="button" class="navbar-burger burger" aria-label="menu" data-target="nav" aria-expanded="false" 
                 onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');"><!--le onclick permet d'afficher les lien Map et Liste -->
