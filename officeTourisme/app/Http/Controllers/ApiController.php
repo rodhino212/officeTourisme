@@ -6,13 +6,21 @@ use Illuminate\Http\Request;
 use App\Point;
 use App\Categorie;
 use App\Agent;
+use DB;
 
 class ApiController extends Controller
 {
     public function getAllPoints(){
         //logic to get all points
         //return Point::all();
-        $point = point::all()->toJson(JSON_PRETTY_PRINT);
+        //$point = point::all()->toJson(JSON_PRETTY_PRINT);
+        $point = DB::table('points')
+                            ->join('categories', 'points.num_categorie', '=', 'categories.num_categorie')
+                            ->join('agents', 'points.num_agent', '=', 'agents.num_agent')
+                            ->select('points.id_point','points.coordonnees','points.nom as nom','points.ville','points.description','agents.nom as agent','points.date_saisie as date saisie','categories.nom as categorie')
+                            ->orderBy('id_point')
+                            ->get()
+                            ->toJson(JSON_PRETTY_PRINT);
         return response($point,200);
         
     }
