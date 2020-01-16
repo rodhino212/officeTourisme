@@ -22,7 +22,7 @@
             </div>
             <div id="nav" class="navbar-menu">
                 <div class="navbar-end">
-                <a class="navbar-item" href="#">Map</a>
+                <a class="navbar-item" href="{{url('/map')}}">Map</a>
                     <a class="navbar-item" href="{{url('/')}}">Liste</a>
                 </div>
             </div>
@@ -84,6 +84,7 @@
         <div class="section_div">
             <section class="box">
                 @yield('liste')
+                @yield('map')
             </section>
         </div>
     </article>
