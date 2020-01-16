@@ -16,6 +16,10 @@ xhr_categorie.onload = () => {
     let data_categorie =JSON.parse(xhr_categorie.responseText);
     // get l'élément par ID
     //let main = document.getElementById('ok');
+    var allCategorie=document.createElement("option");
+    allCategorie.innerHTML= "*";
+    document.getElementById("categorie").appendChild(allCategorie);
+
     data_categorie.forEach(func);
     function func(item,index){
         var op=document.createElement("option");
@@ -39,7 +43,9 @@ xhr_ville.onreadystatechange = function(ev){
 // onload = lors du chargement
 xhr_ville.onload = () => {
     let data_ville =JSON.parse(xhr_ville.responseText);
-
+    var allVille=document.createElement("option");
+    allVille.innerHTML= "*";
+    document.getElementById("ville").appendChild(allVille);
     data_ville.forEach(func);
     function func(item,index){
         var op=document.createElement("option");
